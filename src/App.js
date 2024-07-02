@@ -10,6 +10,7 @@ import { Section } from "./component/Section.jsx";
 import data from "./data/data.json";
 import Footer from "./component/Footer.jsx";
 import { Mis } from "./component/mis.jsx";
+import { Loader } from "./component/Loader.jsx";
 
 import freshTopicImg from "./assests/academy.png";
 import freshTopic2Img from "./assests/story.png";
@@ -20,7 +21,7 @@ import coursesImg from "./assests/image2.png";
 import albumaImg from "./assests/mba-cares.gif";
 import baratImg from "./assests/image1.png";
 import chaiwalaImg from "./assests/image3.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const yellow = "#fff100",
   pink = "#ed1e79",
@@ -39,6 +40,8 @@ function App() {
     barat,
     chaiwala,
   } = data;
+
+  const [loading, setLoading] = useState(true);
 
   const dotCourser = (e) => {
     const cursor = document.querySelector(".cursor");
@@ -60,7 +63,9 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("mousemove", dotCourser);
-
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
     return () => {
       window.removeEventListener("mousemove", dotCourser);
     };
@@ -68,6 +73,7 @@ function App() {
 
   return (
     <>
+      {loading && <Loader />}
       <IntroVideo />
 
       {/* freshTopic */}
